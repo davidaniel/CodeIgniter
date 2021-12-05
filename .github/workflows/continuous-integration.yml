@@ -37,7 +37,7 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Run PHPStan
-        run: phpstan analyse
+        run: phpstan analyse aplication
 
       - name: Run Psalm
         run: psalm --output-format=checkstyle | cs2pr
