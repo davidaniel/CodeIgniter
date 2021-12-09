@@ -12,7 +12,7 @@
 
     <!-- Import the unused code rule set -->
     <rule ref="rulesets/unusedcode.xml" />
-    
+
     <!-- Import the codesize rule set -->
     <rule ref="rulesets/codesize.xml" />
 
