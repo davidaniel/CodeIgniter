@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Run PHPStan
-        run: phpstan analyse .
+#      - name: Run PHPStan
+#        run: phpstan analyse .
 
 #      - name: Run Psalm
 #        run: psalm --output-format=checkstyle | cs2pr
@@ -49,7 +49,7 @@ jobs:
 #      - name: Run phpcs
 #        run: phpcs --standard=PSR2 ./application | cs2pr
 
-      - name : Run phpmd
+      - name : Run PHPMD
         run: phpmd ./application github phpmd-rules.xml --exclude 'application/vendor,application/third_party'
 
 #      - name: "Run friendsofphp/php-cs-fixer"
