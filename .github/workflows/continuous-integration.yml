@@ -50,7 +50,7 @@ jobs:
 #        run: phpcs --standard=PSR2 ./application | cs2pr
 
       - name : Run PHPMD
-        run: phpmd ./application github .github/phpmd-rules.xml --exclude 'application/vendor,application/third_party'
+        run: "phpmd ./application github .github/phpmd-rules.xml --exclude 'application/vendor,application/third_party' | cs2pr"
 
 #      - name: "Run friendsofphp/php-cs-fixer"
 #        run: "vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --format=checkstyle | cs2pr"
