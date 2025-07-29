@@ -1,10 +1,11 @@
 <?php
 
-class CI_TestCase extends PHPUnit_Framework_TestCase {
+class CI_TestCase extends \PHPUnit\Framework\TestCase {
 
 	public $ci_vfs_root;
 	public $ci_app_root;
 	public $ci_base_root;
+	public $ci_readonly_dir;
 	protected $ci_instance;
 	protected static $ci_test_instance;
 
@@ -35,10 +36,11 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	public function setUp()
 	{
 		// Setup VFS with base directories
-		$this->ci_vfs_root = vfsStream::setup();
+		$this->ci_vfs_root = vfsStream::setup('');
 		$this->ci_app_root = vfsStream::newDirectory('application')->at($this->ci_vfs_root);
 		$this->ci_base_root = vfsStream::newDirectory('system')->at($this->ci_vfs_root);
 		$this->ci_view_root = vfsStream::newDirectory('views')->at($this->ci_app_root);
+		$this->ci_readonly_dir = vfsStream::newDirectory('readonly', 555)->at($this->ci_app_root);
 
 		if (method_exists($this, 'set_up'))
 		{
@@ -381,4 +383,18 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		return parent::__call($method, $args);
 	}
 
+	public function setExpectedException($exception_class, $exception_message = '', $exception_code = null)
+	{
+		$use_expect_exception = method_exists($this, 'expectException');
+
+		if ($use_expect_exception)
+		{
+			$this->expectException($exception_class);
+			$exception_message !== '' && $this->expectExceptionMessage($exception_message);
+		}
+		else
+		{
+			parent::setExpectedException($exception_class, $exception_message, $exception_code);
+		}
+	}
 }
