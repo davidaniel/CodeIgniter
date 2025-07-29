@@ -2,6 +2,7 @@ version = 1
 
 exclude_patterns = [
   "application/vendor/*",
+  "application/views/*",
   "system/*",
   "tests/*"
 ]
